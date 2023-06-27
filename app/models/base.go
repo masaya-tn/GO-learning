@@ -17,6 +17,7 @@ var err error
 
 const (
 	tableNameUser = "user"
+	tableNameTodo = "todos"
 )
 
 func init() {
@@ -35,6 +36,15 @@ func init() {
 	)`, tableNameUser)
 
 	Db.Exec(cmdU)
+
+	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id integer primary key autoincrement,
+		content text,
+		user_id integer,
+		created_at datetime
+	)`, tableNameTodo)
+
+	Db.Exec(cmdT)
 }
 
 func createUUID() (uuidobj uuid.UUID) {
