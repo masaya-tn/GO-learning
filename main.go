@@ -29,8 +29,8 @@ func main() {
 	// u.Name = "Test2"
 	// u.Email = "test2@example.com"
 	// u.UpdateUser()
-	// u, _ := models.GetUser(1)
-	// u.CreateTodo("first todo")
+	u, _ := models.GetUser(1)
+	u.CreateTodo("洗濯")
 
 	// u.DeleteUser()
 
@@ -38,6 +38,8 @@ func main() {
 
 	// fmt.Println(u)
 
-	t, _ := models.GetTodo(1)
-	fmt.Println(t)
+	// t, _ := models.GetTodo(1)
+	// t.UpdateTodo("掃除")
+	// t, _ = models.GetTodo(1)
+	// fmt.Println(t)
 }

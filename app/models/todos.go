@@ -39,3 +39,12 @@ func GetTodo(id int) (todo Todo, err error) {
 
 	return todo, err
 }
+
+func (t *Todo) UpdateTodo(content string) (err error) {
+	cmd := `update todos set content = ? where id = ?`
+	_, err = Db.Exec(cmd, content, t.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
