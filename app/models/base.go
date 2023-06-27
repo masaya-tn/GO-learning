@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/google/uuid"
 	"github.com/masaya-tn/GO-learning/config"
+
+	"github.com/google/uuid"
+
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -16,8 +18,9 @@ var Db *sql.DB
 var err error
 
 const (
-	tableNameUser = "user"
-	tableNameTodo = "todos"
+	tableNameUser    = "users"
+	tableNameTodo    = "todos"
+	tableNameSession = "sessions"
 )
 
 func init() {
@@ -27,24 +30,31 @@ func init() {
 	}
 
 	cmdU := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-		id integer primary key autoincrement,
-		uuid string not null unique,
-		name string,
-		email string,
-		password string,
-		created_at datatime
-	)`, tableNameUser)
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		uuid STRING NOT NULL UNIQUE,
+		name STRING,
+		email STRING,
+		password STRING,
+		created_at DATETIME)`, tableNameUser)
 
 	Db.Exec(cmdU)
 
 	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-		id integer primary key autoincrement,
-		content text,
-		user_id integer,
-		created_at datetime
-	)`, tableNameTodo)
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		content TEXT,
+		user_id INTEGER,
+		created_at DATETIME)`, tableNameTodo)
 
 	Db.Exec(cmdT)
+
+	cmdS := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		uuid STRING NOT NULL UNIQUE,
+		email STRING,
+		user_id INTEGER,
+		created_at DATETIME)`, tableNameSession)
+
+	Db.Exec(cmdS)
 }
 
 func createUUID() (uuidobj uuid.UUID) {
